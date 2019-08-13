@@ -9,9 +9,7 @@ router.get(
   '/',
   asyncWrapper(async (req, res) => {
     const users = await userController.readMany();
-
-    // const userObj = users.toObject();
-    return res.status(201).json({ message: 'User successfully created', user: users });
+    return res.status(201).json(users);
   })
 );
 
