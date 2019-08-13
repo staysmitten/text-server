@@ -5,9 +5,15 @@ const asyncWrapper = require('../middleware/asyncWrapper');
 const userController = require('../controllers/user.controller');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get(
+  '/',
+  asyncWrapper(async (req, res) => {
+    const users = await userController.readMany();
+
+    // const userObj = users.toObject();
+    return res.status(201).json({ message: 'User successfully created', user: users });
+  })
+);
 
 router.post(
   '/add',
