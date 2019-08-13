@@ -4,14 +4,20 @@ const router = require('express').Router();
 const asyncWrapper = require('../middleware/asyncWrapper');
 const userController = require('../controllers/user.controller');
 
-/* GET users listing. */
-router.get(
-  '/',
-  asyncWrapper(async (req, res) => {
-    const users = await userController.readMany();
-    return res.status(201).json(users);
-  })
-);
+// Get users without async wrapper
+router.get('/', async function(req, res) {
+  const users = await userController.readMany();
+  // res.status(201).json(users);
+  res.send(users);
+});
+// // GET users listing. WITH ASYNC WRAPPER
+// router.get(
+//   '/',
+//   asyncWrapper(async (req, res) => {
+//     const users = await userController.readMany();
+//     return res.status(201).json(users);
+//   })
+// );
 
 router.post(
   '/add',
