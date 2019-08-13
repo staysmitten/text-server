@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.send(`I'm working!`);
 });
 
 /* GET home page. */
@@ -12,9 +12,7 @@ router.get('/userlist', function(req, res) {
   var db = req.db;
   var collection = db.get('usercollection');
   collection.find({}, {}, function(e, docs) {
-    res.render('userlist', {
-      userlist: docs,
-    });
+    res.send('I am also working');
   });
 });
 
