@@ -6,7 +6,7 @@ const userController = require('../controllers/user.controller');
 
 // Get users without async wrapper
 router.get('/', async function(req, res) {
-  const users = await userController.readMany();
+  const users = await userController.readMany({});
   // res.status(201).json(users);
   res.send(users);
 });
