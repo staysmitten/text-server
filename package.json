@@ -26,6 +26,6 @@
     "heroku"
   ],
   "engines": {
-    "node": "10.x"
+    "node": "10.15.0"
   }
 }
