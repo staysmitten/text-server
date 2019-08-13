@@ -11,6 +11,6 @@ const app = express();
 
 // subrouters
 app.use('/api/user', userRouter);
-app.use('/api/index', indexRouter);
+app.use('/', indexRouter);
 
 module.exports = app;
