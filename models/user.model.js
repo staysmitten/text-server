@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  partnerFirstName: String,
-  partnerLastName: String,
+  fullName: String,
+  partnerFullName: String,
   number: String,
   partnerNumber: String,
   email: String,

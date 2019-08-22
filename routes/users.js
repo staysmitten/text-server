@@ -17,11 +17,9 @@ router.post(
   '/add',
   asyncWrapper(async (req, res) => {
     const user = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      partnerFirstName: req.body.partnerFirstName,
-      partnerLastName: req.body.partnerLastName,
+      fullName: req.body.fullName,
       number: req.body.number,
+      partnerFullName: req.body.partnerFullName,
       partnerNumber: req.body.partnerNumber,
       email: req.body.email,
     };
