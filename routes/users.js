@@ -22,6 +22,7 @@ router.post(
       partnerFullName: req.body.partnerFullName,
       partnerNumber: req.body.partnerNumber,
       email: req.body.email,
+      date: req.body.date,
     };
 
     const createdUser = await userController.createOne(user);

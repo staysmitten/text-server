@@ -6,6 +6,7 @@ const schema = mongoose.Schema({
   number: String,
   partnerNumber: String,
   email: String,
+  date: String,
 });
 
 const User = mongoose.model('user', schema, 'users');
