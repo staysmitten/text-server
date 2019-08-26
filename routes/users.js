@@ -4,15 +4,6 @@ const router = require('express').Router();
 const asyncWrapper = require('../middleware/asyncWrapper');
 const userController = require('../controllers/user.controller');
 
-// GET users listing. WITH ASYNC WRAPPER
-router.get(
-  '/',
-  asyncWrapper(async (req, res) => {
-    const users = await userController.readMany();
-    return res.status(201).json(users);
-  })
-);
-
 router.post(
   '/add',
   asyncWrapper(async (req, res) => {

@@ -6,11 +6,13 @@
 const express = require('express');
 const indexRouter = require('./index');
 const userRouter = require('./users');
+const privateRoute = require('./private/usertable');
 
 const app = express();
 
 // subrouters
 app.use('/api/user', userRouter);
+app.use('/api/user/admin/', privateRoute);
 app.use('/', indexRouter);
 
 module.exports = app;
