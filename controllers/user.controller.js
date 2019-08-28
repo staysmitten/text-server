@@ -6,14 +6,14 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '/../.env') });
 const User = require('../models/user.model');
 // AUTHENTICATION
-// TODO: Add neccessary 
 const validate = require('validate.js');
+const ErrorWithHTTPStatus = require('../utils/error.httpStatus.utils');
+// TODO: Add below
 const { registerUser, loginUser } = require('../services/account');
 const {
   registrationConstraints,
   loginConstraints,
 } = require('../validations/userValidations');
-const ErrorWithHTTPStatus = require('../utils/error.httpStatus.utils');
 
 /**
  * Creates a single user

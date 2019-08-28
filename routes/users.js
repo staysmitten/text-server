@@ -23,4 +23,8 @@ router.post(
   })
 );
 
+router.post('/', user.register);
+
+router.post('/login', user.login);
+
 module.exports = router;
