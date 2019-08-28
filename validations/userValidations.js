@@ -3,8 +3,8 @@
  * @description: Used with validation.js npm package to validate user registration data.
  */
 const registrationConstraints = {
-  email: {
-    email: true,
+  username: {
+    username: true,
     presence: true,
     length: { minimum: 3 }
   },
@@ -12,18 +12,11 @@ const registrationConstraints = {
     presence: true,
     length: { minimum: 8 }
   },
-  fullName: {
-    presence: true,
-    length: { minimum: 1 }
-  },
-  location: {
-    length: { minimum: 2 }
-  }
 };
 
 const loginConstraints = {
-  email: {
-    email: true,
+  username: {
+    username: true,
     presence: true,
     length: { minimum: 3 }
   },

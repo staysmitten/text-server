@@ -6,14 +6,14 @@ const User = require('../models/user.model');
 
 /**
  * userExists
- * @description: Checks if the email already exists in the database
- * @param {string} email
+ * @description: Checks if the username already exists in the database
+ * @param {string} username
  */
-async function userExists(email) {
+async function userExists(username) {
   try {
     const result = await User.findOne({
       where: {
-        email,
+        username,
       },
     });
     return result !== null;
@@ -24,22 +24,16 @@ async function userExists(email) {
 /**
  * createUser
  * @description Stores user data in the database
- * @param {string} email
+ * @param {string} username
  * @param {string} password
  * @param {string} salt
- * @param {string} fullName
- * @param {string} location
- * @param {string} persona
  */
-async function createUser(email, password, salt, fullName, location, persona) {
+async function createUser(username, password, salt) {
   try {
     await User.create({
-      email,
+      username,
       password,
       salt,
-      fullName,
-      location,
-      persona,
     });
   } catch (err) {
     throw err;
@@ -48,14 +42,14 @@ async function createUser(email, password, salt, fullName, location, persona) {
 /**
  * getPassword
  * @description Gets user data.
- * @param {string} email
+ * @param {string} username
  * @returns {object} An object containing hash and salt
  */
-async function getUser(email) {
+async function getUser(username) {
   try {
     return await User.findOne({
       where: {
-        email,
+        username,
       },
     });
   } catch (err) {
@@ -81,7 +75,7 @@ async function getUserToken(id) {
 /**
  * storeToken
  * @description Stores token in the user's database
- * @param {string} email
+ * @param {string} username
  * @param {string} token
  */
 async function storeToken(uuid, token) {

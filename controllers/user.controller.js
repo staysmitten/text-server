@@ -9,7 +9,6 @@ const User = require('../models/user.model');
 const validate = require('validate.js');
 const ErrorWithHTTPStatus = require('../utils/error.httpStatus.utils');
 const { registerUser, loginUser } = require('../services/account');
-// TODO: Add below
 const {
   registrationConstraints,
   loginConstraints,

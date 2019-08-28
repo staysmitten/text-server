@@ -6,19 +6,16 @@ const ErrorWithHTTPStatus = require('../utils/error.httpStatus.utils');
 /**
  * account.js
  * @description: Handles all actions for account information.
- * @param {string} email
- * @param {string} fullName
+ * @param {string} username
  * @param {string} password
- * @param {string} location
- * @param {string} persona
  */
-async function registerUser({ email, fullName, password, location, persona }) {
+async function registerUser({ username, password }) {
   try {
-    if (await userExists(email)) {
+    if (await userExists(username)) {
       throw new ErrorWithHTTPStatus('User already exists.', 400);
     }
     const { hash, salt } = await hashPassword(password);
-    await createUser(email, hash, salt, fullName, location, persona);
+    await createUser(username, hash, salt);
   } catch (err) {
     throw err;
   }
@@ -26,16 +23,16 @@ async function registerUser({ email, fullName, password, location, persona }) {
 /**
  * loginUser
  * @description Handles the logic for logging in users.
- * @param {string} email
+ * @param {string} username
  * @param {string} password
  * @returns {string} JWT Token
  */
-async function loginUser({ email, password }) {
+async function loginUser({ username, password }) {
   try {
-    if (!(await userExists(email))) {
+    if (!(await userExists(username))) {
       throw new ErrorWithHTTPStatus('User does not exists.', 400);
     }
-    const { uuid, persona } = await checkPassword(email, password);
+    const { uuid, persona } = await checkPassword(username, password);
     const token = await createToken(uuid, persona);
     await storeToken(uuid, token);
     return token;
