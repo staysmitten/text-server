@@ -1,7 +1,7 @@
 
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '/../.env') });
-const User = require('../models/user.model');
+const User = require('../models/admin.model');
 
 
 /**
@@ -9,15 +9,12 @@ const User = require('../models/user.model');
  * @description: Checks if the username already exists in the database
  * @param {string} username
  */
-async function userExists(username) {
+async function userExists(body) {
   try {
-    const result = await User.findOne({
-      where: {
-        username,
-      },
-    });
+    const result = await User.findOne(body);
     return result !== null;
   } catch (err) {
+    console.log('User Exist error');
     throw err;
   }
 }
@@ -47,11 +44,7 @@ async function createUser(username, password, salt) {
  */
 async function getUser(username) {
   try {
-    return await User.findOne({
-      where: {
-        username,
-      },
-    });
+    return await User.findOne({username: username});
   } catch (err) {
     throw err;
   }
@@ -63,9 +56,7 @@ async function getUser(username) {
 async function getUserToken(id) {
   try {
     const result = await User.findOne({
-      where: {
         uuid:id,
-      },
     });
     return { token: result.token, id: result.uuid };
   } catch (err) {
@@ -80,7 +71,7 @@ async function getUserToken(id) {
  */
 async function storeToken(uuid, token) {
   try {
-    await User.update({ token }, { where: { uuid } });
+    await User.update({ token }, { uuid });
   } catch (err) {
     throw err;
   }

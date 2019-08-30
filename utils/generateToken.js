@@ -3,16 +3,14 @@ const jwt = require('jsonwebtoken');
  * createToken
  * @description Generates a token for each user when they log in.
  * @param {int} id
- * @param {string} persona
  */
-async function createToken(id, persona) {
+async function createToken(id) {
   const payload = {
-    id,
-    persona
+    id
   };
   const additionalInformation = {
-    issuer: 'accounts.tppipeline.com',
-    audience: 'tppipeline.com',
+    issuer: 'accounts.staysmittentext.com',
+    audience: 'staysmittentext.com',
     expiresIn: process.env.JWT_EXPIRATION_TIME
   };
   return jwt

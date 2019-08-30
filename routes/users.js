@@ -23,8 +23,12 @@ router.post(
   })
 );
 
-router.post('/', userController.register);
-
-router.post('/login', userController.login);
+router.get(
+  '/',
+  asyncWrapper(async (req, res) => {
+    const users = await userController.readMany();
+    return res.status(201).json(users);
+  })
+);
 
 module.exports = router;

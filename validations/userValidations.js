@@ -4,7 +4,6 @@
  */
 const registrationConstraints = {
   username: {
-    username: true,
     presence: true,
     length: { minimum: 3 }
   },
@@ -16,7 +15,6 @@ const registrationConstraints = {
 
 const loginConstraints = {
   username: {
-    username: true,
     presence: true,
     length: { minimum: 3 }
   },

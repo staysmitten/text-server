@@ -11,7 +11,7 @@ const ErrorWithHTTPStatus = require('../utils/error.httpStatus.utils');
  */
 async function registerUser({ username, password }) {
   try {
-    if (await userExists(username)) {
+    if (await userExists({username, password})) {
       throw new ErrorWithHTTPStatus('User already exists.', 400);
     }
     const { hash, salt } = await hashPassword(password);
@@ -29,11 +29,13 @@ async function registerUser({ username, password }) {
  */
 async function loginUser({ username, password }) {
   try {
-    if (!(await userExists(username))) {
+    console.log(`username: ${username}`);
+    console.log(`password: ${password}`);
+    if (!(await userExists({username, password}))) {
       throw new ErrorWithHTTPStatus('User does not exists.', 400);
     }
-    const { uuid, persona } = await checkPassword(username, password);
-    const token = await createToken(uuid, persona);
+    const { uuid } = await checkPassword(username, password);
+    const token = await createToken(uuid);
     await storeToken(uuid, token);
     return token;
   } catch (err) {
