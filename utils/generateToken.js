@@ -11,7 +11,7 @@ async function createToken(id) {
   const additionalInformation = {
     issuer: 'accounts.staysmittentext.com',
     audience: 'staysmittentext.com',
-    expiresIn: process.env.JWT_EXPIRATION_TIME
+    expiresIn: '1 day'
   };
   return jwt
     .sign(payload, process.env.PRIVATE_KEY, additionalInformation)

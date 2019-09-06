@@ -1,9 +1,5 @@
-/**
- * dashboard.js
- * @description:: All routes related to dashboard functionality.
- */
 const router = require('express').Router();
-const passport = require('passport');
+const passport = require('passport'); 
 
 /**
  *  [GET] /
@@ -19,7 +15,7 @@ const passport = require('passport');
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
-  async (req, res) => {
+  (req, res) => {
     res.json({ message: 'You made it!' });
   }
 );

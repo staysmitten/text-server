@@ -52,9 +52,9 @@ router.post(
     // Provide User with login token if they do
     if (isMatch) {
       // sign a jwt
-      const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
+      const token = jwt.sign(user.toJSON(), new Buffer( process.env.JWT_SECRET, 'base64' ), {
         expiresIn: '1 day',
-        issuer: 'aura.community', // TODO: talk about this with the team and whether we want an issuer to be more secure
+        // issuer: 'staysmittentext.com',
       });
       return res.json({
         message: 'Successfully logged in',

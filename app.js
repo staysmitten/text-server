@@ -6,6 +6,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 const DataMaster = require('./controllers/DataMaster');
 const errorHandler = require('./middleware/errorHandler');
+const JwtStrategy = require('./passport');
+const passport = require('passport');
+
+
 
 // MongoDB stuff
 var mainRouter = require('./routes/mainRouter');
@@ -24,13 +28,17 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// authentication middleware
+app.use(passport.initialize());
+passport.use(JwtStrategy);
+
 // routes
 app.use('/', mainRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
 app.use(errorHandler);
 
