@@ -7,6 +7,7 @@ const schema = mongoose.Schema({
   partnerNumber: String,
   email: String,
   date: String,
+  status: String,
 });
 
 const User = mongoose.model('user', schema, 'users');
