@@ -32,7 +32,7 @@ const readOne = async options => {
  * @returns Response
  */
 const readMany = async options => {
-  const returnAwait = await User.find(options);
+  const returnAwait = await User.find(options).sort({'date': 'desc'});
   return returnAwait;
 };
 
