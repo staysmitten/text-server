@@ -3,7 +3,6 @@ var createError = require('http-errors');
 const cors = require('cors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 const DataMaster = require('./controllers/DataMaster');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -21,7 +20,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
 
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
