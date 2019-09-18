@@ -1,3 +1,4 @@
+require('dotenv').config();
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -54,7 +55,7 @@ router.post(
       // sign a jwt
       const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
         expiresIn: '1 day',
-        issuer: 'aura.community', // TODO: talk about this with the team and whether we want an issuer to be more secure
+        issuer: 'staysmittentext.com', // TODO: talk about this with the team and whether we want an issuer to be more secure
       });
       return res.json({
         message: 'Successfully logged in',

@@ -1,13 +1,11 @@
 require('dotenv').config();
-var createError = require('http-errors');
 const cors = require('cors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+const passport = require('passport');
+const JwtStrategy = require('./passport');
 const DataMaster = require('./controllers/DataMaster');
 const errorHandler = require('./middleware/errorHandler');
-
-// MongoDB stuff
 var mainRouter = require('./routes/mainRouter');
 
 var app = express();
@@ -21,16 +19,14 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
 
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// authentication middleware
+// app.use(passport.initialize());
+// passport.use(JwtStrategy);
 
 // routes
 app.use('/', mainRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
 app.use(errorHandler);
 

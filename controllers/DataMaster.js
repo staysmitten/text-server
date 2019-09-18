@@ -10,7 +10,8 @@
  */
 
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '/../.env') });
+// require('dotenv').config({ path: path.join(__dirname, '/../.env') });
+const User = require('../models/admin.model');
 const mongoose = require('mongoose');
 
 class DataMaster {
@@ -41,6 +42,7 @@ class DataMaster {
    * seed() uses connectForMutations() instead.
    */
   connect() {
+    console.log('COnnecting mongoose');
     mongoose.connect(
       `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${
         this.dbName
@@ -57,6 +59,8 @@ class DataMaster {
    * in different databases depending on the value passed to it.
    */
   connectForMutations(nameDB) {
+    console.log('Connecting for mutations');
+    console.log(nameDB);
     if (nameDB === process.env.DB_NAME || nameDB === process.env.DB_NAME_TEST || nameDB === process.env.ENVIRONMENT) {
       mongoose.connect(
         `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${
@@ -76,6 +80,19 @@ class DataMaster {
   disconnect() {
     mongoose.connection.close();
     this.connected = false;
+  }
+
+  async findUserById(id) {
+    console.log('Find User ID:');
+    console.log(id);
+    if (!this.connected) {
+      this.connectForMutations(this.dbName);
+    }
+    try {
+      return await User.findOne({ _id: id });
+    } catch (err) {
+      throw err;
+    }
   }
 }
 

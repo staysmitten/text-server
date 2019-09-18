@@ -4,7 +4,7 @@
  */
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '/../.env') });
-const User = require('../models/admin.model');
+const Admin = require('../models/admin.model');
 
 /**
  * Creates a single user
@@ -25,13 +25,13 @@ const createOne = async (user, options) => {
  * @returns Response
  */
 const readOne = async (options) => {
-  const returnAwait = await User.findOne(options);
+  const returnAwait = await Admin.findOne(options);
   return returnAwait;
 };
 
-const userController = {
+const adminController = {
   createOne,
   readOne
 };
 
-module.exports = userController;
+module.exports = adminController;
