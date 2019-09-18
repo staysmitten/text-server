@@ -3,7 +3,7 @@
 const router = require('express').Router();
 const asyncWrapper = require('../middleware/asyncWrapper');
 const jwt = require('jsonwebtoken');
-const verifyToken = require('../../middleware/verifyToken');
+const verifyToken = require('../middleware/verifyToken');
 const userController = require('../controllers/user.controller');
 
 router.post(
