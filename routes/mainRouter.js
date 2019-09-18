@@ -4,7 +4,6 @@
  */
 
 const express = require('express');
-const passport = require('passport');
 const indexRouter = require('./index');
 const userRouter = require('./users');
 const authRouter = require('./auth');

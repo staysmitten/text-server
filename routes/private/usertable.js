@@ -6,7 +6,7 @@ const userController = require('../../controllers/user.controller');
 
 
 /**
- *  [GET] /
+ *  [GET] 
  *  @description: Testing purposes for a protected route.
  */
 router.get('/', 
@@ -21,6 +21,6 @@ router.get('/',
       }
     });
   }
-  );
+);
 
 module.exports = router;

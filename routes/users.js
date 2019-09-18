@@ -2,6 +2,8 @@
 // var router = express.Router();
 const router = require('express').Router();
 const asyncWrapper = require('../middleware/asyncWrapper');
+const jwt = require('jsonwebtoken');
+const verifyToken = require('../../middleware/verifyToken');
 const userController = require('../controllers/user.controller');
 
 router.post(
@@ -24,12 +26,18 @@ router.post(
   })
 );
 
-router.get(
-  '/',
-  asyncWrapper(async (req, res) => {
-    const users = await userController.readMany();
-    return res.status(201).json(users);
-  })
+router.get('/', 
+  verifyToken,
+  (req, res) => {  
+    jwt.verify(req.token, process.env.JWT_SECRET, async (err, authData) => {
+      if(err) {
+        res.sendStatus(403);
+      } else {
+        const users = await userController.readMany();
+        return res.status(201).json(users);
+      }
+    });
+  }
 );
 
 module.exports = router;
