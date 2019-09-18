@@ -13,12 +13,6 @@ router.get('/',
   verifyToken,
   (req, res) => {  
     jwt.verify(req.token, process.env.JWT_SECRET, async (err, authData) => {
-      // try{
-      //   const users = await userController.readMany();
-      //   return res.status(201).json(users);
-      // } catch(err){
-      //   res.sendStatus(403);
-      // }
       if(err) {
         res.sendStatus(403);
       } else {
@@ -28,14 +22,5 @@ router.get('/',
     });
   }
   );
-
-// // Route to use once authentication is working
-// router.get(
-//   '/',
-//   asyncWrapper(async (req, res) => {
-//     const users = await userController.readMany();
-//     return res.status(201).json(users);
-//   })
-// );
 
 module.exports = router;
